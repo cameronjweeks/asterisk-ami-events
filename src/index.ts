@@ -11,7 +11,6 @@ const manager = new ami(
 
 manager.keepConnected();
 
-// Listen for any/all AMI events.
 manager.on('managerevent', function (evt: amiEvent) {
   console.log(evt);
 });
