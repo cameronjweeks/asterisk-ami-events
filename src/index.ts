@@ -2,10 +2,10 @@ import { amiEvent } from './interfaces/amiEvent';
 import ami from 'asterisk-manager';
 
 const manager = new ami(
-  '5038',
-  'docker2.backdev.net',
-  'nodeapp',
-  '8a2f9735cd13ed7a2a9611152ecae0a2',
+  process.env.AMI_PORT,
+  process.env.AMI_HOST,
+  process.env.AMI_USER,
+  process.env.AMI_PASSWORD,
   true,
 );
 
