@@ -1,3 +1,3 @@
 export interface amiEvent {
-  Event: string;
+  event: string;
 }

@@ -1,5 +1,6 @@
 import { amiEvent } from './interfaces/amiEvent';
 import ami from 'asterisk-manager';
+import scClient from './sc';
 
 const manager = new ami(
   process.env.AMI_PORT,
@@ -10,8 +11,23 @@ const manager = new ami(
 );
 
 manager.keepConnected();
+const socket = scClient.connect();
+(async () => {
+  for await (const { error } of socket.listener('error')) {
+    console.error(error);
+  }
+  for await (const event of socket.listener('connect')) {
+    console.log('Socket is connected', event);
+  }
+})();
 
 manager.on('managerevent', function (evt: amiEvent) {
+  if (
+    evt.event === 'Newchannel' ||
+    evt.event === 'Hangup'
+  ) {
+    scClient.sendMessage(socket, 'amiEvent', evt);
+  }
   console.log(evt);
 });
 
