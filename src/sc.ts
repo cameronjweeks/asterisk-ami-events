@@ -15,7 +15,9 @@ interface scClient {
 
 const scClient: scClient = {
   connect: (): AGClientSocket => {
-    console.log('Starting to connect to socket');
+    console.log(
+      `Starting to connect to socket ${process.env.SOCKET_HOST}`,
+    );
     const options: SocketConnectOptions = {
       hostname: process.env.SOCKET_HOST,
       port: 8000,

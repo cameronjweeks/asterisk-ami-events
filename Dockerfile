@@ -19,4 +19,4 @@ COPY . .
 RUN npx tsc
 
 # The command to run the compiled app
-CMD [ "node", "dist/index.js" ]
+CMD [ "npm", "run", "dev" ]
